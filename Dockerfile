@@ -16,8 +16,5 @@ COPY . .
 # Build ứng dụng
 RUN yarn run build
 
-# Expose cổng mà ứng dụng sẽ chạy
-EXPOSE 3000
-
 # Lệnh chạy ứng dụng
 CMD ["yarn", "run", "start:prod"]
