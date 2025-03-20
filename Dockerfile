@@ -10,6 +10,9 @@ COPY package*.json ./
 # Cài đặt các phụ thuộc
 RUN yarn install
 
+# Cài đặt PM2 toàn cục
+RUN yarn global add pm2
+
 # Sao chép toàn bộ mã nguồn
 COPY . .
 
