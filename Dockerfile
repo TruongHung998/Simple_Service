@@ -16,5 +16,5 @@ COPY . .
 # Build ứng dụng
 RUN yarn run build
 
-# Lệnh chạy ứng dụng
-CMD ["yarn", "run", "start:prod"]
+# Lệnh chạy ứng dụng bằng PM2
+CMD ["pm2-runtime", "start", "pm2.config.js"]
