@@ -24,7 +24,7 @@ export class UserController {
   findAll() {
     return {
       data: this.userService.findAll(),
-      mesaage: 'User data fetched successfully'
+      mesaage: 'User data successfully'
     }
   }
 
