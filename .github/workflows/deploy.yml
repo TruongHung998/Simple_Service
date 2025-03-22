@@ -23,3 +23,18 @@ jobs:
             cd /var/www/Simple_Service/
             git pull origin main
             docker-compose up -d --build
+      - name: Gửi thông báo Telegram (Thành công)
+        if: success()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=✅ Deploy thành công trên server!"
+
+      - name: Gửi thông báo Telegram (Thất bại với logs)
+        if: failure()
+        run: |
+          ERROR_LOG=$(tail -n 20 deploy_log.txt | sed 's/"/\\"/g' | sed "s/'/\\'/g")
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=❌ Deploy thất bại! \n\`\`\`${ERROR_LOG}\`\`\`" \
+          -d "parse_mode=Markdown"
