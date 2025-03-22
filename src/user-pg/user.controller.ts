@@ -22,7 +22,10 @@ export class UserController {
 
   @Get()
   findAll() {
-    return this.userService.findAll();
+    return {
+      data: this.userService.findAll(),
+      mesaage: 'User data fetched successfully'
+    }
   }
 
   @Get(":id")
